@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #FFF6EE;
+  --warm-blush: #F2C4A0;
+  --rose: #C97B65;
+  --deep-rose: #8C4A3E;
+  --amber: #E0995A;
+  --gold: #B87830;
+  --text-dark: #4A2820;
+  --text-mid: #7A4A40;
+  --text-light: #B87868;
+  --font-lora: 'Lora', serif;
+  --font-playfair: 'Playfair Display', serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lora', serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* Grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Ink write-in animation for text */
+@keyframes ink-in {
+  0%   { opacity: 0; filter: blur(4px); letter-spacing: 0.15em; }
+  100% { opacity: 1; filter: blur(0); letter-spacing: normal; }
+}
+.ink-in { animation: ink-in 1.2s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* Heartbeat pulse */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.18); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.12); }
+  70%       { transform: scale(1); }
+}
+.heartbeat { animation: heartbeat 1.8s ease-in-out infinite; }
+
+/* Soft glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,123,101,0.2), 0 0 60px rgba(201,123,101,0.05); }
+  50%       { box-shadow: 0 0 40px rgba(201,123,101,0.35), 0 0 100px rgba(201,123,101,0.12); }
+}
+.glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+
+/* Pen-writing underline */
+@keyframes draw-line {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+.draw-line::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+  border-radius: 2px;
+  animation: draw-line 1.2s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+  width: 0;
+}
+
+/* Candle flicker */
+@keyframes candle-flicker {
+  0%,100% { filter: brightness(1) drop-shadow(0 0 4px rgba(255,179,71,0.4)); }
+  25%     { filter: brightness(1.15) drop-shadow(0 0 12px rgba(255,179,71,0.7)); }
+  50%     { filter: brightness(0.92) drop-shadow(0 0 6px rgba(255,179,71,0.3)); }
+  75%     { filter: brightness(1.2) drop-shadow(0 0 16px rgba(255,179,71,0.8)); }
+}
+.candle-flicker { animation: candle-flicker 2.4s ease-in-out infinite; }
+
+/* Petal float */
+@keyframes petal-float {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-105vh) rotate(720deg) scale(0.3); opacity: 0; }
+}
+.petal-float { animation: petal-float linear infinite; }
+
+.perspective-1000 { perspective: 1000px; }
+.transform-style-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.rotateY-180 { transform: rotateY(180deg); }
+/* Menghilangkan scrollbar di Chrome, Safari, dan Opera */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Menghilangkan scrollbar di IE, Edge, dan Firefox */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
