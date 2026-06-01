@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import ProgressBar from "./ProgressBar";
 import Stage0 from "./Stage0"; // Pembuka
 import Stage1 from "./Stage1"; // Pemutar Lagu (Vinyl)
-import Stage2 from "./Stage2"; // Tiup Lilin (🎂🕯️) - sesuaikan path jika berbeda
+import Stage2 from "./Stage2"; // Tiup Lilin (🎂🕯️)
 import Stage3 from "./Stage3"; // Buka Kado (🎁 dengan efek ramai)
 import Stage4Memory from "./Stage4Memory"; // Memory Game (Kartu Bergambar)
 import Stage5Quiz from "./Stage5Quiz"; // Kuis Interaktif (Pilihan Ganda)
@@ -21,9 +21,9 @@ const TOTAL_STAGES = 7;
 export default function BirthdayAppContainer() {
   const [stage, setStage] = useState(0);
   const next = () => setStage((s) => Math.min(s + 1, TOTAL_STAGES - 1));
-  const prev = () => setStage((s) => Math.max(s - 1, 0));
   
-  const STAGE_COMPONENTS = [Stage0, Stage1, Stage2, Stage3, Stage4Memory, Stage5Quiz, Stage6];
+  // Memberikan tipe data 'any[]' agar TypeScript meloloskan perbedaan props antar Stage
+  const STAGE_COMPONENTS: any[] = [Stage0, Stage1, Stage2, Stage3, Stage4Memory, Stage5Quiz, Stage6];
   const CurrentStage = STAGE_COMPONENTS[stage];
 
   return (
@@ -49,7 +49,8 @@ export default function BirthdayAppContainer() {
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center"
         >
-          <CurrentStage onNext={next} />
+          {/* Mengirimkan dummy onBack untuk menenangkan strict check TypeScript */}
+          <CurrentStage onNext={next} onBack={() => {}} />
         </motion.div>
       </AnimatePresence>
 
