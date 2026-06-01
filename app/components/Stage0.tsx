@@ -108,7 +108,7 @@ function EnvelopeSVG({ isOpening }: { isOpening: boolean }) {
         {/* 1. KERTAS SURAT (Paling Belakang) */}
         <foreignObject x="25" y="10" width="90" height="70">
           {/* Pembungkus XHTML standard agar Vercel build tidak bermasalah */}
-          <div xmlns="http://www.w3.org/1999/xhtml" style={{ width: "100%", height: "100%" }}>
+          <div style={{ width: "100%", height: "100%" }}>
             <motion.div
               initial={{ y: 30, opacity: 0, scale: 0.95 }}
               animate={isOpening ? { y: -25, opacity: 1, scale: 1 } : { y: 30, opacity: 0, scale: 0.95 }}
