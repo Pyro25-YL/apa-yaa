@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
 import ProgressBar from "./ProgressBar";
-import Stage0 from "./Stage0"; // Pembuka
+import Stage0 from "./Stage01"; // Pembuka
 import Stage1 from "./Stage1"; // Pemutar Lagu (Vinyl)
 import Stage2 from "./Stage2"; // Tiup Lilin (🎂🕯️)
 import Stage3 from "./Stage3"; // Buka Kado (🎁 dengan efek ramai)
