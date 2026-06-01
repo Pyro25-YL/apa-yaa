@@ -4,8 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface StageProps {
-  onNext: () => void;
-  onBack: () => void; // Tetap dipertahankan di interface agar tidak merusak type-system parent component
+  onNext: () => void;// Tetap dipertahankan di interface agar tidak merusak type-system parent component
 }
 
 // ─── Sparkle star ─────────────────────────────────────────────────────────────

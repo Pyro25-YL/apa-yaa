@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface StageProps {
   onNext: () => void;
-  onBack?: () => void;
 }
 
 // ─── Sparkle star ─────────────────────────────────────────────────────────────
@@ -204,7 +203,7 @@ export default function Stage4Memory({ onNext }: StageProps) {
   const itemVariants = {
     hidden: { opacity: 0, y: 35 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 55, damping: 13 } },
-  };
+  }as const;
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start pt-14 pb-16 px-4 w-full relative bg-[#FDFBF7] overflow-y-auto select-none">

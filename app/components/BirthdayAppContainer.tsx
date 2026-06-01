@@ -21,6 +21,7 @@ const TOTAL_STAGES = 7;
 export default function BirthdayAppContainer() {
   const [stage, setStage] = useState(0);
   const next = () => setStage((s) => Math.min(s + 1, TOTAL_STAGES - 1));
+  const prev = () => setStage((s) => Math.max(s - 1, 0));
   
   const STAGE_COMPONENTS = [Stage0, Stage1, Stage2, Stage3, Stage4Memory, Stage5Quiz, Stage6];
   const CurrentStage = STAGE_COMPONENTS[stage];
