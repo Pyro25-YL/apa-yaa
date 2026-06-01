@@ -219,7 +219,7 @@ export default function Stage0({ onNext }: Stage0Props) {
   const handleOpen = () => {
     if (isLocked || opening) return;
     setOpening(true);
-    setTimeout(onNext, 1600); // Waktu jeda transisi sebelum masuk ke halaman berikutnya
+    setTimeout(onNext, 1600); // Waktu jeda transisi sebelum masuk ke halaman berikutny
   };
 
   if (!isHydrated) {
