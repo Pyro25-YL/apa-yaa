@@ -107,30 +107,28 @@ function EnvelopeSVG({ isOpening }: { isOpening: boolean }) {
         
         {/* 1. KERTAS SURAT (Paling Belakang) */}
         <foreignObject x="25" y="10" width="90" height="70">
-          {/* Pembungkus XHTML standard agar Vercel build tidak bermasalah */}
-          <div xmlns="http://www.w3.org/1999/xhtml" style={{ width: "100%", height: "100%" }}>
-            <motion.div
-              initial={{ y: 30, opacity: 0, scale: 0.95 }}
-              animate={isOpening ? { y: -25, opacity: 1, scale: 1 } : { y: 30, opacity: 0, scale: 0.95 }}
-              transition={{ delay: 0.25, duration: 0.5, ease: "easeOut" }}
-              className="rounded-sm px-2 py-1.5 flex flex-col gap-1"
-              style={{ 
-                background: "#FFFDF9", 
-                boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                border: "1px solid rgba(212,133,106,0.2)" 
-              }}
-            >
-              {[60, 80, 70, 55].map((w, i) => (
-                <div key={i} className="rounded-full" style={{ height: 2, width: `${w}%`, background: "rgba(212,133,106,0.3)" }} />
-              ))}
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ y: 30, opacity: 0, scale: 0.95 }}
+            animate={isOpening ? { y: -25, opacity: 1, scale: 1 } : { y: 30, opacity: 0, scale: 0.95 }}
+            transition={{ delay: 0.25, duration: 0.5, ease: "easeOut" }}
+            className="rounded-sm px-2 py-1.5 flex flex-col gap-1"
+            style={{ 
+              background: "#FFFDF9", 
+              boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+              border: "1px solid rgba(212,133,106,0.2)" 
+            }}
+          >
+            {[60, 80, 70, 55].map((w, i) => (
+              <div key={i} className="rounded-full" style={{ height: 2, width: `${w}%`, background: "rgba(212,133,106,0.3)" }} />
+            ))}
+          </motion.div>
         </foreignObject>
 
         {/* 2. BADAN BELAKANG AMPLOP */}
         <rect x="5" y="28" width="130" height="76" rx="6" fill="url(#envBody0)" />
         
         {/* 3. PENUTUP ATAS AMPLOP (FLAP) */}
+        {/* Ditaruh di sini agar saat 'closed', dia melipat ke bawah menutupi kertas, tapi berada di bawah lipatan depan */}
         <motion.path
           variants={flapVariants}
           initial="closed"
@@ -140,6 +138,7 @@ function EnvelopeSVG({ isOpening }: { isOpening: boolean }) {
         />
         
         {/* 4. LIPATAN SAMPING & BAWAH AMPLOP */}
+        {/* Mengunci penutup atas di belakangnya saat tertutup */}
         <path d="M5 104 L70 65 L135 104" fill="url(#envFold0)" opacity="0.6" />
         <line x1="5" y1="28" x2="70" y2="65" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
         <line x1="135" y1="28" x2="70" y2="65" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
@@ -180,8 +179,7 @@ function EnvelopeSVG({ isOpening }: { isOpening: boolean }) {
 // ─── Main Stage0 ─────────────────────────────────────────────────────────────
 export default function Stage0({ onNext }: Stage0Props) {
   const [opening, setOpening] = useState(false);
-  // MODIFIKASI: Diubah langsung jadi false agar bypass countdown pengunci
-  const [isLocked, setIsLocked] = useState(false);
+  const [isLocked, setIsLocked] = useState(true);
   const [isHydrated, setIsHydrated] = useState(false);
   const [countdownText, setCountdownText] = useState("");
 
@@ -197,8 +195,7 @@ export default function Stage0({ onNext }: Stage0Props) {
         setIsLocked(false);
         setCountdownText("");
       } else {
-        // MODIFIKASI: Dikomen agar saat ditransfer ke Vercel statusnya tidak terkunci kembali
-        // setIsLocked(true);
+        setIsLocked(true);
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -222,7 +219,7 @@ export default function Stage0({ onNext }: Stage0Props) {
   const handleOpen = () => {
     if (isLocked || opening) return;
     setOpening(true);
-    setTimeout(onNext, 1600);
+    setTimeout(onNext, 1600); // Waktu jeda transisi sebelum masuk ke halaman berikutnya
   };
 
   if (!isHydrated) {
@@ -382,7 +379,7 @@ export default function Stage0({ onNext }: Stage0Props) {
 
         <h2 className="mb-4 text-2xl font-serif text-[#4A3B32] leading-snug tracking-wide">
           Makasih yahh udah <br />
-          <span className="italic font-light text-[#6B5A4E] block mt-1">menjadi wanita yang hebat &amp; kuat</span>
+          <span className="italic font-light text-[#6B5A4E] block mt-1">menjadi wanita yang hebat & kuat</span>
         </h2>
 
         <p className="text-[#6B5A4E] text-[12px] leading-relaxed mb-8 px-2 text-justify font-serif">
@@ -412,7 +409,7 @@ export default function Stage0({ onNext }: Stage0Props) {
           <span className="relative z-10 flex items-center justify-center gap-2">
             <motion.span animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>💌</motion.span>
             Buka Pesan
-            <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1, repeat: Infinity }}>{"→"}</motion.span>
+            <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1, repeat: Infinity }}>→</motion.span>
           </span>
         </motion.button>
 
