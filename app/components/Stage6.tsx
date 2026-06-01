@@ -329,6 +329,7 @@ export default function Stage6() {
                   "Semoga di usia yang baru ini kamu diberikan kesehatan, kebahagiaan, ketenangan, dan kekuatan untuk menghadapi semua hal yang sedang maupun akan kamu lalui. Semoga semua usaha yang sedang kamu perjuangkan menemukan jalannya, dan semoga impian-impian yang kamu simpan perlahan menjadi kenyataan.",
                   "Kalau suatu hari dunia terasa berat, jangan lupa bahwa kamu tidak harus sempurna untuk menjadi seseorang yang berharga. Kamu sudah cukup, dan kamu sudah melakukan yang terbaik sejauh ini.",
                   "Nikmati harimu, makan yang enak, istirahat yang cukup, dan jangan lupa bahagia.",
+                  "Terima kasih sudah menjadi Shendy yang aku kenal selama ini. Aku bersyukur bisa mengenalmu, dan aku senang melihat semua hal baik yang sudah kamu capai. Aku percaya kamu akan terus melakukan hal-hal hebat di tahun-tahun mendatang.",
                 ].map((text, i) => (
                   <p key={i} className="mb-4 text-[12px] leading-relaxed text-[#4A3B32] font-serif text-justify relative z-10">
                     {text}

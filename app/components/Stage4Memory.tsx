@@ -203,32 +203,27 @@ export default function Stage4Memory({ onNext }: StageProps) {
   const itemVariants = {
     hidden: { opacity: 0, y: 35 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 55, damping: 13 } },
-  }as const;
+  } as const;
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start pt-14 pb-16 px-4 w-full relative bg-[#FDFBF7] overflow-y-auto select-none">
 
       {/* ══════════ RICH BACKGROUND ══════════ */}
-      {/* 1. Fine grid */}
       <div className="fixed inset-0 pointer-events-none z-0"
         style={{ backgroundImage: `linear-gradient(rgba(74,59,50,0.055) 1px, transparent 1px), linear-gradient(to right, rgba(74,59,50,0.055) 1px, transparent 1px)`, backgroundSize: "24px 24px" }} />
-      {/* 2. Offset dot halftone */}
       <div className="fixed inset-0 pointer-events-none z-0"
         style={{ backgroundImage: "radial-gradient(circle, rgba(212,133,106,0.11) 1.2px, transparent 1.2px)", backgroundSize: "18px 18px", backgroundPosition: "9px 9px" }} />
-      {/* 3. Diagonal stripes */}
       <DiagStripe className="top-0 left-0" />
       <DiagStripe className="bottom-0 right-0" />
       <DiagStripe className="top-0 right-0" />
       <DiagStripe className="bottom-0 left-0" />
-      {/* 4. Aurora blobs */}
-      <DriftBlob delay={0}   left="-8%"  top="12%"  size={400} color="rgba(255,183,178,0.28)" />
+      <DriftBlob delay={0}   left="-8%"   top="12%"  size={400} color="rgba(255,183,178,0.28)" />
       <DriftBlob delay={2}   left="108%" top="78%"  size={440} color="rgba(212,133,106,0.2)"  />
       <DriftBlob delay={1}   left="55%"  top="-5%"  size={300} color="rgba(255,209,193,0.22)" />
       <DriftBlob delay={3}   left="20%"  top="105%" size={320} color="rgba(255,183,178,0.18)" />
       <DriftBlob delay={1.5} left="88%"  top="32%"  size={220} color="rgba(255,209,193,0.18)" />
       <DriftBlob delay={0.8} left="14%"  top="52%"  size={130} color="rgba(255,183,178,0.14)" />
       <DriftBlob delay={2.5} left="82%"  top="58%"  size={150} color="rgba(212,133,106,0.11)" />
-      {/* 5. Orbital rings */}
       <FloatingRing delay={0}   left="9%"  top="18%"  size={85} />
       <FloatingRing delay={1}   left="91%" top="15%"  size={65} reverse />
       <FloatingRing delay={0.5} left="89%" top="78%"  size={95} />
@@ -237,21 +232,18 @@ export default function Stage4Memory({ onNext }: StageProps) {
       <FloatingRing delay={3}   left="50%" top="93%"  size={70} reverse />
       <FloatingRing delay={2.5} left="28%" top="40%"  size={45} />
       <FloatingRing delay={3.5} left="74%" top="60%"  size={50} reverse />
-      {/* 6. Falling stars */}
       {[
         { left:"8%",  delay:0,   duration:7  }, { left:"22%", delay:2.5, duration:9  },
         { left:"40%", delay:1,   duration:8  }, { left:"58%", delay:4,   duration:11 },
         { left:"72%", delay:1.8, duration:7  }, { left:"88%", delay:3,   duration:9  },
         { left:"95%", delay:5,   duration:6  },
       ].map((s,i) => <FallingStar key={i} {...s} />)}
-      {/* 7. Floating petals */}
       {[
         { left:"6%",  emoji:"🌸", delay:0   }, { left:"18%", emoji:"✨", delay:2   },
         { left:"35%", emoji:"🌼", delay:4   }, { left:"52%", emoji:"🌸", delay:1   },
         { left:"66%", emoji:"✨", delay:3   }, { left:"80%", emoji:"🌸", delay:1.5 },
         { left:"46%", emoji:"💛", delay:5.5 }, { left:"90%", emoji:"🌼", delay:2.8 },
       ].map((p,i) => <FloatingPetal key={i} {...p} />)}
-      {/* 8. Sparkles */}
       {[
         {left:"4%", top:"10%"},{left:"93%",top:"8%" },{left:"7%", top:"35%"},{left:"91%",top:"32%"},
         {left:"9%", top:"62%"},{left:"89%",top:"60%"},{left:"5%", top:"86%"},{left:"92%",top:"88%"},
@@ -264,19 +256,16 @@ export default function Stage4Memory({ onNext }: StageProps) {
           color={i%2===0?"#D4856A":"#FFB7B2"}
         />
       ))}
-      {/* 9. Dust motes */}
       {[
         {left:"11%",top:"20%"},{left:"84%",top:"16%"},{left:"17%",top:"68%"},{left:"78%",top:"72%"},
         {left:"3%", top:"53%"},{left:"95%",top:"48%"},{left:"36%",top:"7%" },{left:"63%",top:"92%"},
         {left:"23%",top:"33%"},{left:"73%",top:"28%"},{left:"29%",top:"82%"},{left:"66%",top:"76%"},
         {left:"42%",top:"90%"},{left:"57%",top:"12%"},
       ].map((p,i) => <DustMote key={i} delay={i*0.42} {...p} />)}
-      {/* 10. Corner flourishes */}
       <CornerFlourish className="top-0 left-0" />
       <CornerFlourish className="bottom-0 right-0 rotate-180" />
       <CornerFlourish className="top-0 right-0 scale-x-[-1]" />
       <CornerFlourish className="bottom-0 left-0 scale-y-[-1]" />
-      {/* 11. Centre glow */}
       <div className="fixed pointer-events-none z-0"
         style={{ top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:700, height:700,
           borderRadius:"50%", filter:"blur(110px)",
@@ -310,7 +299,12 @@ export default function Stage4Memory({ onNext }: StageProps) {
             <motion.div key={item.id} variants={itemVariants}
               onHoverStart={() => setHoveredCard(index)}
               onHoverEnd={() => setHoveredCard(null)}
+              // Menambahkan Touch Handler agar bersahabat dengan layar HP responsive
+              onTouchStart={() => setHoveredCard(index)}
               whileHover={{ y: -7 }}
+              animate={{
+                y: isHovered ? -7 : 0,
+              }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
               className="relative overflow-hidden rounded-[26px] bg-white flex flex-col cursor-default"
               style={{
@@ -321,7 +315,7 @@ export default function Stage4Memory({ onNext }: StageProps) {
                 transition: "box-shadow 0.35s ease, border-color 0.35s ease",
               }}
             >
-              {/* Top accent bar — animates on hover */}
+              {/* Top accent bar */}
               <motion.div className="h-[4px] w-full origin-left"
                 animate={{ scaleX: isHovered ? 1 : 0.92, opacity: isHovered ? 1 : 0.7 }}
                 transition={{ duration: 0.3 }}
@@ -352,7 +346,7 @@ export default function Stage4Memory({ onNext }: StageProps) {
                 )}
               </AnimatePresence>
 
-              {/* Spark particles on hover enter */}
+              {/* Spark particles row */}
               <CardHoverParticles active={isHovered} />
 
               {/* Dot bg pattern */}
@@ -398,7 +392,7 @@ export default function Stage4Memory({ onNext }: StageProps) {
 
                 {/* Text */}
                 <div className="flex-1 min-w-0">
-                  {/* Tag pill — slides + brightens on hover */}
+                  {/* Tag pill */}
                   <motion.span
                     animate={{ x: isHovered ? 4 : 0, opacity: isHovered ? 1 : 0.85 }}
                     transition={{ duration: 0.28 }}
@@ -409,14 +403,16 @@ export default function Stage4Memory({ onNext }: StageProps) {
                       border: `1px solid ${isHovered ? accent.to + "65" : accent.to + "35"}`,
                       transition: "all 0.28s ease",
                     }}
-                  >{item.tag}</motion.span>
+                  >		{item.tag}
+                  </motion.span>
 
                   {/* Title */}
                   <motion.h3
                     animate={{ color: isHovered ? "#C06B55" : "#4A3B32" }}
                     transition={{ duration: 0.28 }}
                     className="font-serif font-bold text-[13.5px] mb-2 leading-snug tracking-wide"
-                  >{item.title}</motion.h3>
+                  >		{item.title}
+                  </motion.h3>
 
                   <p className="text-[11.5px] text-[#6B5A4E] leading-relaxed font-serif text-justify">{item.desc}</p>
                 </div>
@@ -429,13 +425,15 @@ export default function Stage4Memory({ onNext }: StageProps) {
                   transition={{ duration: 0.3 }}
                   className="text-5xl font-serif font-bold leading-none select-none"
                   style={{ color: accent.to }}
-                >{item.id}</motion.span>
+                >	{item.id}
+                </motion.span>
                 <motion.span
                   animate={{ opacity: isHovered ? 0.22 : 0.08, scale: isHovered ? 1.12 : 1 }}
                   transition={{ duration: 0.3 }}
                   className="text-[38px] font-serif leading-none select-none"
                   style={{ color: accent.to }}
-                >"</motion.span>
+                >	"
+                </motion.span>
               </div>
 
               {/* Bottom grow line */}
