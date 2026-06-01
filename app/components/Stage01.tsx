@@ -185,7 +185,7 @@ export default function Stage0({ onNext }: Stage0Props) {
 
   useEffect(() => {
     setIsHydrated(true);
-    const targetTime = new Date("2026-06-01T07:16:00Z").getTime();
+    const targetTime = new Date("2026-06-01T17:00:00Z").getTime();
 
     const calculateCountdown = () => {
       const now = new Date().getTime();
